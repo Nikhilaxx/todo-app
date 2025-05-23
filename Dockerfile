@@ -1,13 +1,18 @@
-FROM python:3.9-slim
+# Use official Python runtime as a parent image
+FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
+# Copy requirements and install
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the rest of the app
 COPY . .
 
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
+# Expose port 5000 for Flask app
+EXPOSE 5000
 
-CMD ["flask", "run"]
+# Command to run the app
+CMD ["python", "app.py"]

@@ -1,18 +1,23 @@
 from flask import Flask, render_template
 import os
+from datetime import datetime
+
 app = Flask(__name__)
 
-tasks = [
+
+
+
+
+
+@app.route("/")
+def index():
+    tasks = [
     "Buy groceries",
     "Call mom",
     "Finish project"
 ]
-
-@app.route('/')
-def index():
-    return render_template('index.html', tasks=tasks)
-
-
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return render_template("index.html", tasks=tasks, timestamp=timestamp)
    
 
 
